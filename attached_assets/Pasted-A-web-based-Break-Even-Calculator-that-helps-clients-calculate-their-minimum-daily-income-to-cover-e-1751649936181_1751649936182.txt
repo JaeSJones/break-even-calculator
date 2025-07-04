@@ -1,0 +1,55 @@
+A web-based Break-Even Calculator that helps clients calculate their minimum daily income to cover expenses and price services effectively.
+
+Core Features:
+
+Title at the top: “Break-Even Calculator” (no extra description).
+
+Inputs for: Rent/Booth Fee, Supplies/Backbar, Insurance/Licenses, Marketing/Admin, Taxes Savings, Education/Tools, Miscellaneous, plus planned work days per week.
+
+Results screen showing total monthly costs and minimum daily earnings needed to break even, with a detailed calculation breakdown.
+
+Options to download results as PDF or email them (with email input field).
+
+UX/UI:
+
+Dark theme background using dark gray or charcoal tones—not pure black. The goal is a soft, comfortable dark mode like Facebook or Discord’s dark theme, not harsh or too dark.
+
+Pastel accent colors: soft pink, mint green, pastel orange, pastel purple, used subtly for input fields and icons.
+
+Icons for each expense category: sleek, gradient icons inside rounded squares (not circles).
+
+Fonts: Modern, clean fonts such as Inter or Poppins, with polished spacing and visual balance.
+
+Design should feel minimal but refined and professional—not overly simple or childish.
+
+Subtle gradients, gentle shadows, and depth to create a more polished, premium feel.
+
+Smooth, elegant animations and transitions for a high-end, seamless experience.
+
+Mobile-friendly single-column layout with large, easy-to-tap inputs.
+
+Enhancements:
+
+Subtle hover effects on inputs to brighten pastel accents slightly.
+
+Progress indicator showing “Step 1 of 2.”
+
+Animated number counters for the results.
+
+“Review & Edit” button to easily return to the input screen.
+
+Tooltip hints for each expense category.
+
+“Save Calculation” feature using local storage.
+
+“Reset All” button to clear inputs quickly.
+
+Gentle shake animation for missing fields.
+
+Success checkmarks on completed fields.
+
+Dollar sign placeholders in inputs and auto-formatting of numbers.
+
+Option to toggle between weekly and monthly expenses.
+
+Overall, the app should feel clean, sleek, and sophisticated—similar to the visual polish of high-end apps and websites—with a dark theme that feels modern and welcoming.
