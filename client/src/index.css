@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+
+  /* Dark theme colors - Discord/Facebook inspired */
+  --dark-bg: hsl(220, 13%, 18%);
+  --dark-card: hsl(220, 13%, 24%);
+  --dark-input: hsl(220, 13%, 29%);
+  --text-light: hsl(210, 11%, 96%);
+  --text-muted: hsl(210, 9%, 78%);
+  
+  /* Pastel colors */
+  --pastel-pink: hsl(340, 50%, 75%);
+  --pastel-green: hsl(160, 50%, 75%);
+  --pastel-purple: hsl(270, 50%, 75%);
+  --pastel-orange: hsl(30, 50%, 75%);
+  --pastel-blue: hsl(210, 50%, 75%);
+  --pastel-yellow: hsl(50, 50%, 75%);
+  --success-green: hsl(150, 50%, 75%);
+}
+
+.dark {
+  --background: hsl(220, 13%, 18%);
+  --foreground: hsl(210, 11%, 96%);
+  --muted: hsl(220, 13%, 24%);
+  --muted-foreground: hsl(210, 9%, 78%);
+  --popover: hsl(220, 13%, 24%);
+  --popover-foreground: hsl(210, 11%, 96%);
+  --card: hsl(220, 13%, 24%);
+  --card-foreground: hsl(210, 11%, 96%);
+  --border: hsl(220, 13%, 29%);
+  --input: hsl(220, 13%, 29%);
+  --primary: hsl(340, 50%, 75%);
+  --primary-foreground: hsl(220, 13%, 18%);
+  --secondary: hsl(220, 13%, 24%);
+  --secondary-foreground: hsl(210, 11%, 96%);
+  --accent: hsl(220, 13%, 24%);
+  --accent-foreground: hsl(210, 11%, 96%);
+  --destructive: hsl(0, 62.8%, 50%);
+  --destructive-foreground: hsl(210, 11%, 96%);
+  --ring: hsl(220, 13%, 29%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  .dark body {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+  }
+}
+
+@layer components {
+  .gradient-icon {
+    @apply rounded-xl p-3 inline-flex items-center justify-center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to));
+  }
+
+  .expense-input {
+    @apply transition-all duration-300 border-2 border-transparent;
+  }
+
+  .expense-input:focus {
+    @apply transform -translate-y-0.5;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .expense-input:hover {
+    @apply transform -translate-y-0.5;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .progress-bar {
+    @apply h-1.5 rounded-full transition-all duration-300;
+    background: linear-gradient(90deg, var(--pastel-pink) 0%, var(--pastel-green) 100%);
+  }
+
+  .counter {
+    @apply text-4xl font-bold;
+    color: var(--pastel-pink);
+  }
+
+  .btn-primary {
+    @apply transition-all duration-300 transform hover:-translate-y-0.5;
+    background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-purple) 100%);
+    box-shadow: 0 4px 15px rgba(232, 180, 203, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 8px 25px rgba(232, 180, 203, 0.4);
+  }
+
+  .btn-secondary {
+    @apply transition-all duration-300 transform hover:-translate-y-0.5;
+    background: linear-gradient(135deg, var(--pastel-green) 0%, var(--success-green) 100%);
+    box-shadow: 0 4px 15px rgba(184, 230, 184, 0.3);
+  }
+
+  .btn-secondary:hover {
+    box-shadow: 0 8px 25px rgba(184, 230, 184, 0.4);
+  }
+
+  .tooltip-content {
+    @apply bg-card text-card-foreground p-3 rounded-lg shadow-lg max-w-xs text-sm;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-input);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-light);
+}
