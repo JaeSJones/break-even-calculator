@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Download, Mail, Edit, Plus, Send } from "lucide-react";
+import { Download, Edit, Plus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/currency";
 import { apiRequest } from "@/lib/queryClient";
@@ -32,9 +31,7 @@ const expenseLabels: Record<string, string> = {
 };
 
 export default function ResultsDisplay({ calculationData, onEdit, onNewCalculation }: ResultsDisplayProps) {
-  const [email, setEmail] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
-  const [isEmailing, setIsEmailing] = useState(false);
   const [animatedTotal, setAnimatedTotal] = useState(0);
   const [animatedDaily, setAnimatedDaily] = useState(0);
   const { toast } = useToast();
@@ -106,38 +103,7 @@ export default function ResultsDisplay({ calculationData, onEdit, onNewCalculati
     }
   };
 
-  const handleEmailResults = async () => {
-    if (!email || !email.includes("@")) {
-      toast({
-        title: "Invalid Email",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsEmailing(true);
-    try {
-      await apiRequest("POST", "/api/email-results", {
-        email,
-        calculationData,
-      });
-      
-      toast({
-        title: "Email Sent",
-        description: `Your break-even calculation has been sent to ${email}.`,
-      });
-      setEmail("");
-    } catch (error) {
-      toast({
-        title: "Email Error",
-        description: "Failed to send email. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsEmailing(false);
-    }
-  };
+  
 
   const breakdown = Object.entries(calculationData.expenses)
     .filter(([_, amount]) => amount > 0)
@@ -227,53 +193,24 @@ export default function ResultsDisplay({ calculationData, onEdit, onNewCalculati
           <CardTitle className="text-foreground">Export Your Results</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
-            <Button
-              onClick={handleDownloadPDF}
-              disabled={isDownloading}
-              className="btn-primary text-primary-foreground font-semibold"
-            >
-              {isDownloading ? (
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="w-4 h-4 mr-2"
-                >
-                  <Download className="w-4 h-4" />
-                </motion.div>
-              ) : (
-                <Download className="w-4 h-4 mr-2" />
-              )}
-              Download PDF
-            </Button>
-            <div className="flex space-x-2">
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter email address"
-                className="flex-1 bg-input border-border text-foreground"
-              />
-              <Button
-                onClick={handleEmailResults}
-                disabled={isEmailing}
-                className="btn-secondary text-primary-foreground font-semibold"
+          <Button
+            onClick={handleDownloadPDF}
+            disabled={isDownloading}
+            className="btn-primary text-primary-foreground font-semibold w-full"
+          >
+            {isDownloading ? (
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="w-4 h-4 mr-2"
               >
-                {isEmailing ? (
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    className="w-4 h-4 mr-2"
-                  >
-                    <Send className="w-4 h-4" />
-                  </motion.div>
-                ) : (
-                  <Mail className="w-4 h-4 mr-2" />
-                )}
-                Email
-              </Button>
-            </div>
-          </div>
+                <Download className="w-4 h-4" />
+              </motion.div>
+            ) : (
+              <Download className="w-4 h-4 mr-2" />
+            )}
+            Download PDF
+          </Button>
         </CardContent>
       </Card>
 
